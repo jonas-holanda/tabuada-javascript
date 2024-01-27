@@ -9,10 +9,11 @@ form.addEventListener('submit', event => {
 });
 
 const tabuada = (numero) => {
-    numero = parseInt(numero.value);
 
+    numero = Number(numero.value);
+    
     if (isNaN(numero)) {
-        resultado.innerHTML = '<p>O campo Número não pode estar Vazio. Tente Novamente!</p>';
+        resultado.innerHTML = '<p>Informe um valor válido. Tente Novamente!</p>';
         
     } else {
         calcular(numero, 'soma');
@@ -28,7 +29,6 @@ const calcular = (numero, tipo) => {
     secao.classList.add('secao');
 
     let valores = '';
-
     switch (tipo) {
         case 'soma':
             soma = true;
@@ -50,18 +50,34 @@ const calcular = (numero, tipo) => {
 
     for (let i = 1; i < 11; i++) {
         if (soma) {
-            valores += `<p> ${numero} + ${i} = ${numero+i}</p>`;
+            if (Number.isInteger(numero)) {
+                valores += `<p> ${numero} + ${i} = ${numero+i}</p>`;
+            } else {
+                valores += `<p> ${numero} + ${i} = ${(numero+i).toFixed(2)}</p>`;
+            }
         }
         if (subtracao) {
-            valores += `<p> ${numero} - ${i} = ${numero-i}</p>`;
+            if (Number.isInteger(numero)) {
+                valores += `<p> ${numero} - ${i} = ${numero-i}</p>`;
+            } else {
+                valores += `<p> ${numero} - ${i} = ${(numero-i).toFixed(2)}</p>`;
+            }
         }
 
         if (multiplicacao) {
-            valores += `<p> ${numero} x ${i} = ${numero*i}</p> `;
+            if (Number.isInteger(numero)) {
+                valores += `<p> ${numero} x ${i} = ${numero*i}</p> `;
+            } else {
+                valores += `<p> ${numero} x ${i} = ${(numero*i).toFixed(2)}</p> `;
+            }
         }
 
         if (divisao) {
-            valores += `<p> ${numero} ÷ ${i} = ${(numero/i).toFixed(2)}</p>`;
+            if (Number.isInteger(numero)) {
+                valores += `<p> ${numero} ÷ ${i} = ${(numero/i).toFixed(2)}</p>`;
+            } else {
+                valores += `<p> ${numero} ÷ ${i} = ${(numero/i).toFixed(2)}</p>`;
+            }
         }
 
     }
